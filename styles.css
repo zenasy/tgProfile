@@ -628,7 +628,14 @@ body {
     transform: translateY(-3px);
     box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
 }
-
+.avatar-image {
+    width: 200px;
+    height: 200px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 3px solid rgba(255, 255, 255, 0.3);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+}
 .copy-btn:hover {
     background-color: rgba(88, 101, 242, 0.3);
     border-color: rgba(88, 101, 242, 0.5);
