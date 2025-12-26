@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Алексей | Контакты</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* Временные стили прямо в HTML для надежности */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Inter', sans-serif;
+            line-height: 1.6;
+            color: #f0f0f0;
+            overflow-x: hidden;
+            position: relative;
+            min-height: 100vh;
+        }
+        
+        /* Фоновое изображение */
+        .background-image {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 120%;
+            background-image: url('https://images.unsplash.com/photo-1519681393784-d120267933ba?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            z-index: -2;
+            filter: brightness(0.7);
+        }
+        
+        /* Затемнение фона */
+        .overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(to bottom, rgba(10, 10, 10, 0.9), rgba(10, 10, 10, 0.95));
+            z-index: -1;
+        }
+        
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 0 20px;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            position: relative;
+            z-index: 1;
+        }
+        
+        /* Покажем все элементы белым цветом для проверки */
+        .main-content, .profile-section, .footer {
+            opacity: 1 !important;
+            visibility: visible !important;
+            display: block !important;
+        }
+    </style>
+</head>
+<body>
+    <!-- Фоновое изображение -->
+    <div class="background-image"></div>
+    
+    <!-- Затемнение фона -->
+    <div class="overlay"></div>
+    
+    <!-- Основной контент -->
+    <div class="container">
+        <!-- Профиль -->
+        <main class="main-content">
+            <div class="profile-section">
+                <div class="avatar-container">
+                    <div class="avatar">
+                        <img src="https://avatars.mds.yandex.net/i?id=817dcb19638dc90db9dda626e713ed6d_l-5221954-images-thumbs&n=13"width="300" height="200">
+
+                    </div>
+                </div>
+                
+                <h1 class="name">Zenasy</h1>
+                <p class="tagline">основа запаса</p>
+                
+                <div class="info-section">
+                    <div class="info-item">
+                        <div class="info-icon">
+                            <i class="fab fa-discord"></i>
+                        </div>
+                        <div class="info-content">
+                            <h3 class="info-title">Discord</h3>
+                            <p class="info-text">zenasi</p>
+                            <button class="copy-btn" data-copy="zenasi">
+                                <i class="far fa-copy"></i> Копировать
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <div class="info-item">
+                        <div class="info-icon">
+                            <i class="fas fa-envelope"></i>
+                        </div>
+                        <div class="info-content">
+                            <h3 class="info-title">Email</h3>
+                            <p class="info-text">alex.dorrr@gmail.com</p>
+                            <a href="mailto:alex.dorrr@gmail.com" class="contact-btn">
+                                <i class="fas fa-paper-plane"></i> Написать
+                            </a>
+                        </div>
+                    </div>
+                    
+                    <div class="info-item">
+                        <div class="info-icon">
+                            <i class="fab fa-steam"></i>
+                        </div>
+                        <div class="info-content">
+                            <h3 class="info-title">Steam</h3>
+                            <p class="info-text">BUNNYHOP|ZENASY</p>
+                            <a href="https://steamcommunity.com/profiles/76561199540858427/" target="_blank" class="contact-btn">
+                                <i class="fas fa-external-link-alt"></i> Перейти
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="status-section">
+                    <div class="status-indicator">
+                        <div class="status-dot online"></div>
+                        <span class="status-text">В сети</span>
+                    </div>
+                    <p class="status-description">  </p>
+                </div>
+            </div>
+        </main>
+        
+        <!-- Футер -->
+        <footer class="footer">
+            <p class="copyright">&copy; 2026</p>
+            <p class="footer-text">Moscow</p>
+        </footer>
+    </div>
+    
+    <!-- Уведомление о копировании -->
+    <div class="notification" id="copyNotification">
+        <p>Discord тег скопирован в буфер обмена!</p>
+    </div>
+    
+    <script>
+        // Копирование Discord тега
+        document.querySelectorAll('.copy-btn').forEach(button => {
+            button.addEventListener('click', function() {
+                const textToCopy = this.getAttribute('data-copy');
+                navigator.clipboard.writeText(textToCopy).then(() => {
+                    // Показываем уведомление
+                    const notification = document.getElementById('copyNotification');
+                    notification.classList.add('show');
+                    
+                    // Меняем текст кнопки на короткое время
+                    const originalHTML = this.innerHTML;
+                    this.innerHTML = '<i class="fas fa-check"></i> Скопировано';
+                    this.classList.add('copied');
+                    
+                    setTimeout(() => {
+                        notification.classList.remove('show');
+                        this.innerHTML = originalHTML;
+                        this.classList.remove('copied');
+                    }, 2000);
+                });
+            });
+        });
+        
+        // Эффект параллакса для фона
+        window.addEventListener('scroll', function() {
+            const scrolled = window.pageYOffset;
+            const background = document.querySelector('.background-image');
+            if (background) {
+                background.style.transform = `translateY(${scrolled * 0.3}px)`;
+            }
+        });
+        
+        // Анимация появления элементов при загрузке
+        document.addEventListener('DOMContentLoaded', function() {
+            const elements = document.querySelectorAll('.profile-section > *');
+            elements.forEach((element, index) => {
+                setTimeout(() => {
+                    element.style.opacity = '1';
+                    element.style.transform = 'translateY(0)';
+                }, 100 * index);
+            });
+        });
+        
+        // Гарантированно показываем контент
+        setTimeout(() => {
+            document.querySelector('.profile-section').style.opacity = '1';
+            document.querySelector('.profile-section').style.transform = 'translateY(0)';
+        }, 100);
+    </script>
+</body>
+</html>
