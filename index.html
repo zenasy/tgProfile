@@ -2,74 +2,13 @@
 <html lang="ru">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Алексей | Контакты</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Zenasy | Контакты</title>
     <link rel="stylesheet" href="styles.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <style>
-        /* Временные стили прямо в HTML для надежности */
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-        
-        body {
-            font-family: 'Inter', sans-serif;
-            line-height: 1.6;
-            color: #f0f0f0;
-            overflow-x: hidden;
-            position: relative;
-            min-height: 100vh;
-        }
-        
-        /* Фоновое изображение */
-        .background-image {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 120%;
-            background-image: url('https://images.steamusercontent.com/ugc/10798047375695622/7C6ECCF699397B15C127F5A3C3F98EDE89AAD0C2/');
-            background-size: cover;
-            background-position: center;
-            background-repeat: no-repeat;
-            z-index: -2;
-            filter: brightness();
-        }
-        
-        /* Затемнение фона */
-        .overlay {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(to bottom, rgba(47, 0, 255, 0.233), rgba(255, 255, 255, 0.171));
-            z-index: -1;
-        }
-        
-        .container {
-            max-width: 800px;
-            margin: 0 auto;
-            padding: 0 20px;
-            min-height: 100vh;
-            display: flex;
-            flex-direction: column;
-            position: relative;
-            z-index: 1;
-        }
-        
-        /* Покажем все элементы белым цветом для проверки */
-        .main-content, .profile-section, .footer {
-            opacity: 1 !important;
-            visibility: visible !important;
-            display: block !important;
-        }
-    </style>
 </head>
 <body>
     <!-- Фоновое изображение -->
@@ -85,8 +24,10 @@
             <div class="profile-section">
                 <div class="avatar-container">
                     <div class="avatar">
-                        <img src="https://avatars.mds.yandex.net/i?id=817dcb19638dc90db9dda626e713ed6d_l-5221954-images-thumbs&n=13"width="300" height="200" class="avatar-image">
-
+                        <img src="https://avatars.mds.yandex.net/i?id=817dcb19638dc90db9dda626e713ed6d_l-5221954-images-thumbs&n=13" 
+                             alt="Zenasy" 
+                             class="avatar-image"
+                             loading="lazy">
                     </div>
                 </div>
                 
@@ -102,7 +43,7 @@
                             <h3 class="info-title">Discord</h3>
                             <p class="info-text">zenasi</p>
                             <button class="copy-btn" data-copy="zenasi">
-                                <i class="far fa-copy"></i> Копировать
+                                <i class="far fa-copy"></i> <span class="btn-text">Копировать</span>
                             </button>
                         </div>
                     </div>
@@ -115,7 +56,7 @@
                             <h3 class="info-title">Email</h3>
                             <p class="info-text">alex.dorrr@gmail.com</p>
                             <a href="mailto:alex.dorrr@gmail.com" class="contact-btn">
-                                <i class="fas fa-paper-plane"></i> Написать
+                                <i class="fas fa-paper-plane"></i> <span class="btn-text">Написать</span>
                             </a>
                         </div>
                     </div>
@@ -128,7 +69,7 @@
                             <h3 class="info-title">Steam</h3>
                             <p class="info-text">BUNNYHOP|ZENASY</p>
                             <a href="https://steamcommunity.com/profiles/76561199540858427/" target="_blank" class="contact-btn">
-                                <i class="fas fa-external-link-alt"></i> Перейти
+                                <i class="fas fa-external-link-alt"></i> <span class="btn-text">Перейти</span>
                             </a>
                         </div>
                     </div>
@@ -139,7 +80,7 @@
                         <div class="status-dot online"></div>
                         <span class="status-text">В сети</span>
                     </div>
-                    <p class="status-description">  </p>
+                    <p class="status-description"></p>
                 </div>
             </div>
         </main>
@@ -153,7 +94,10 @@
     
     <!-- Уведомление о копировании -->
     <div class="notification" id="copyNotification">
-        <p>Discord тег скопирован в буфер обмена!</p>
+        <div class="notification-content">
+            <i class="fas fa-check-circle"></i>
+            <p>Discord тег скопирован!</p>
+        </div>
     </div>
     
     <script>
@@ -167,44 +111,43 @@
                     notification.classList.add('show');
                     
                     // Меняем текст кнопки на короткое время
-                    const originalHTML = this.innerHTML;
-                    this.innerHTML = '<i class="fas fa-check"></i> Скопировано';
+                    const btnText = this.querySelector('.btn-text');
+                    const originalText = btnText.textContent;
+                    btnText.textContent = 'Скопировано!';
                     this.classList.add('copied');
                     
                     setTimeout(() => {
                         notification.classList.remove('show');
-                        this.innerHTML = originalHTML;
+                        btnText.textContent = originalText;
                         this.classList.remove('copied');
                     }, 2000);
                 });
             });
         });
         
-        // Эффект параллакса для фона
-        window.addEventListener('scroll', function() {
-            const scrolled = window.pageYOffset;
-            const background = document.querySelector('.background-image');
-            if (background) {
-                background.style.transform = `translateY(${scrolled * 0.3}px)`;
-            }
-        });
-        
-        // Анимация появления элементов при загрузке
-        document.addEventListener('DOMContentLoaded', function() {
-            const elements = document.querySelectorAll('.profile-section > *');
-            elements.forEach((element, index) => {
-                setTimeout(() => {
-                    element.style.opacity = '1';
-                    element.style.transform = 'translateY(0)';
-                }, 100 * index);
+        // Эффект параллакса для фона (только на десктопе)
+        if (window.innerWidth > 768) {
+            window.addEventListener('scroll', function() {
+                const scrolled = window.pageYOffset;
+                const background = document.querySelector('.background-image');
+                if (background) {
+                    background.style.transform = `translateY(${scrolled * 0.3}px)`;
+                }
             });
-        });
+        }
         
-        // Гарантированно показываем контент
-        setTimeout(() => {
-            document.querySelector('.profile-section').style.opacity = '1';
-            document.querySelector('.profile-section').style.transform = 'translateY(0)';
-        }, 100);
+        // Предотвращаем масштабирование при двойном тапе на мобильных
+        let lastTouchEnd = 0;
+        document.addEventListener('touchend', function(event) {
+            const now = (new Date()).getTime();
+            if (now - lastTouchEnd <= 300) {
+                event.preventDefault();
+            }
+            lastTouchEnd = now;
+        }, false);
+        
+        // Адаптация для сенсорных устройств
+        document.addEventListener('touchstart', function() {}, {passive: true});
     </script>
 </body>
 </html>
